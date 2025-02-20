@@ -1,66 +1,151 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📱 Proyek Flutter + Laravel Back-end
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📝 Deskripsi Proyek
+Proyek ini adalah aplikasi mobile berbasis **Flutter** yang terintegrasi dengan **Laravel** sebagai back-end. Aplikasi ini mencakup fitur **autentikasi**, **CRUD posting**, **like/dislike**, serta fitur **manajemen artis** dengan navigasi yang interaktif.
 
-## About Laravel
+## 🚀 Teknologi yang Digunakan
+- **Flutter** (State Management: Bloc)
+- **Laravel** (Framework PHP untuk API Back-end)
+- **MySQL** (Database)
+- **Postman** (Untuk pengujian API)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📂 Struktur Proyek
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### **Flutter (Front-End)**
 
-## Learning Laravel
+```
+lib/
+├── blocs/                # State Management (Bloc)
+│   ├── auth/            # Autentikasi
+│   ├── post/            # Post Management
+│   ├── artist/          # Manajemen Artis
+├── screens/              # Halaman UI
+│   ├── login_screen.dart
+│   ├── home_screen.dart
+│   ├── profile_screen.dart
+│   ├── artists_screen.dart
+├── widgets/              # Komponen Reusable
+│   ├── post_card.dart
+│   ├── youtube_embed.dart
+│   ├── create_post_widget.dart
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### **Laravel (Back-End)**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── AuthController.php
+│   │   ├── PostController.php
+│   │   ├── ArtistController.php
+├── Models/
+│   ├── User.php
+│   ├── Post.php
+│   ├── Artist.php
+├── database/
+│   ├── migrations/
+│   │   ├── 2025_02_20_create_posts_table.php
+│   │   ├── 2025_02_20_create_artists_table.php
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🔧 **Setup Laravel Back-end**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Live Server : https://api-nando.batubhayangkara.com
 
-### Premium Partners
+### 1️⃣ **Clone Repository & Install Dependencies**
+```sh
+git clone https://github.com/aryanando/test_laravel_api.git
+cd repo/backend
+composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 2️⃣ **Konfigurasi `.env`**
+Salin `.env.example` ke `.env`:
+```sh
+cp .env.example .env
+```
+Edit file `.env` untuk database:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mydatabase
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Contributing
+### 3️⃣ **Generate App Key & Migrate Database**
+```sh
+php artisan key:generate
+php artisan migrate --seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4️⃣ **Jalankan Server Laravel**
+```sh
+php artisan serve --host=0.0.0.0 --port=8081
+```
+Server API akan berjalan di **http://127.0.0.1:8081**.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📲 **Setup Flutter Front-End**
 
-## Security Vulnerabilities
+### 1️⃣ **Clone Repository & Install Dependencies**
+```sh
+git clone https://github.com/aryanando/test_app.git
+cd test_app
+flutter pub get
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2️⃣ **Jalankan Aplikasi di Emulator / Perangkat Fisik**
+```sh
+flutter run
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🛠 **Setup Postman untuk API**
+
+### 1️⃣ **Import Collection Postman**
+- **Buka Postman**
+- **Klik Import** (File -> Import)
+- **Pilih file `Api-Test.postman_collection.json`**
+
+### 2️⃣ **Import Environment untuk API**
+- **Buka Postman**
+- **Klik Settings (⚙️) -> Environments**
+- **Klik Import**
+- **Pilih file `Test-API-ENV.postman_environment`**
+- **Atur Environment ke `API Laravel`**
+
+### 3️⃣ **Gunakan Endpoint API**
+| Endpoint               | Method   | Deskripsi              |
+| ---------------------- | -------- | ---------------------- |
+| `/api/register`        | `POST`   | Registrasi akun baru   |
+| `/api/login`           | `POST`   | Login pengguna         |
+| `/api/profile`         | `GET`    | Ambil profil pengguna  |
+| `/api/update-profile`  | `POST`   | Update profil pengguna |
+| `/api/posts`           | `GET`    | Ambil daftar post      |
+| `/api/posts`           | `POST`   | Buat post baru         |
+| `/api/posts/{id}/like` | `POST`   | Like/unlike post       |
+| `/api/artist`          | `GET`    | Ambil daftar artis     |
+| `/api/artist`          | `POST`   | Tambah artis baru      |
+| `/api/artist/{id}`     | `PUT`    | Update artis           |
+| `/api/artist/{id}`     | `DELETE` | Hapus artis            |
+
+---
+
+**📝 Catatan:** Saya mengucapkan permohonan maaf karena sedikit lambat dalam mengumpulkan proyek ini dikarenakan mengalami musibah dislokasi lutut. Dan maaf karena masih belum menyertakan uji fitur live camera dikarenakan waktu.
+
+## 👨‍💻 **Kontributor**
+
+- **Aryanando** - Backend & API
+- **Aryanando** - Flutter Front-end
+
+🚀 **Selamat Coding!** 🔥
+
