@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -59,8 +60,8 @@ class PostController extends Controller
     {
         $request->validate([
             'content' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
-            'video' => 'nullable|mimes:mp4,mov,avi,flv|max:20480', // Max 20MB for video uploads
+            'image' => 'nullable|image',
+            'video' => 'nullable|mimes:mp4,mov,avi,flv', // Max 20MB for video uploads
             'youtube_link' => 'nullable|url'
         ]);
 
@@ -68,13 +69,16 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->content = $request->content;
 
+        // ✅ Save Image (if uploaded) and return FULL URL
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('posts', 'public');
-            $post->image = $path; // Store only the path
+            $imagePath = $request->file('image')->store('public/posts');
+            $post->image = Storage::url($imagePath); // ✅ Converts to full URL
         }
 
+        // ✅ Save Video (if uploaded) and return FULL URL
         if ($request->hasFile('video')) {
-            $post->video = $request->file('video')->store('videos', 'public');
+            $videoPath = $request->file('video')->store('public/posts');
+            $post->video = Storage::url($videoPath); // ✅ Converts to full URL
         } elseif ($request->youtube_link) {
             // Extract YouTube video ID from URL
             $post->video = $this->extractYouTubeID($request->youtube_link);
